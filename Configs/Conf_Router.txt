@@ -1,0 +1,92 @@
+Using 1041 bytes
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname Router0
+!
+!
+!
+enable secret 5 $1$mERr$vkYaXnKGfLgWNDfn7gSo9/
+!
+!
+!
+!
+!
+!
+ip cef
+ipv6 unicast-routing
+!
+no ipv6 cef
+!
+!
+!
+username admin privilege 15 secret 5 $1$mERr$vkYaXnKGfLgWNDfn7gSo9/
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain-name CoteurBen.local
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+description verbinding naar LAN1
+ip address 192.168.1.1 255.255.255.0
+duplex auto
+speed auto
+ipv6 address 2001:DB8:1::1/64
+ipv6 enable
+!
+interface GigabitEthernet0/0/1
+description Verbinding naar LAN2
+ip address 192.168.2.1 255.255.255.0
+duplex auto
+speed auto
+ipv6 address 2001:DB8:2::1/64
+ipv6 enable
+!
+interface Vlan1
+no ip address
+shutdown
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+banner motd ^Cerboden toegang voor onbevoegden!
+
+
+^C
+!
+!
+!
+!
+line con 0
+password 7 08117462
+login
+!
+line aux 0
+!
+line vty 0 4
+password 7 08117462
+login local
+transport input ssh
+!
+!
+!
+end
